@@ -1,0 +1,30 @@
+name: z-aillm-mixtral-8x7b-lora
+ollama_base_model: mixtral:8x7b
+hf_base_model: mistralai/Mixtral-8x7B-Instruct-v0.1
+dataset: z-aillm/fine-tuning/datasets/z-aillm-instructions.jsonl
+output_dir: z-aillm/training/outputs/mixtral-8x7b
+adapter_dir: z-aillm/adapters/mixtral-8x7b
+max_seq_length: 2048
+load_in_4bit: true
+torch_dtype: bfloat16
+gradient_checkpointing: true
+epochs: 1
+learning_rate: 0.0001
+batch_size: 1
+gradient_accumulation_steps: 16
+warmup_ratio: 0.03
+logging_steps: 5
+save_steps: 25
+lora:
+  r: 8
+  alpha: 16
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - w1
+    - w2
+    - w3

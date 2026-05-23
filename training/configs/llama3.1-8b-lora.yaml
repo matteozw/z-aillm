@@ -1,0 +1,29 @@
+name: z-aillm-llama3.1-8b-lora
+ollama_base_model: llama3.1:8b
+hf_base_model: meta-llama/Llama-3.1-8B-Instruct
+dataset: z-aillm/fine-tuning/datasets/z-aillm-instructions.jsonl
+output_dir: z-aillm/training/outputs/llama3.1-8b
+adapter_dir: z-aillm/adapters/llama3.1-8b
+max_seq_length: 2048
+load_in_4bit: true
+torch_dtype: bfloat16
+gradient_checkpointing: true
+epochs: 2
+learning_rate: 0.0002
+batch_size: 1
+gradient_accumulation_steps: 8
+warmup_ratio: 0.03
+logging_steps: 5
+save_steps: 50
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+outputs/
+logs/
+wandb/
+adapters/*.safetensors
+adapters/*.gguf
+fine-tuning/datasets/*.jsonl
+!fine-tuning/datasets/.gitkeep
