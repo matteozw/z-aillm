@@ -5,10 +5,9 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$Root = Split-Path -Parent $PSScriptRoot
-$Python = Join-Path $Root "venv\Scripts\python.exe"
+$Python = Join-Path $PSScriptRoot ".venv\Scripts\python.exe"
 if (-not (Test-Path -LiteralPath $Python)) {
-    $Python = "python"
+    throw "Missing training venv. Run .\z-aillm\install-training-stack.ps1 first."
 }
 
 $Config = Join-Path $PSScriptRoot "training\configs\$Profile-lora.yaml"
@@ -18,3 +17,4 @@ if ($DryRun) {
 }
 
 & $Python @ArgsList
+exit $LASTEXITCODE

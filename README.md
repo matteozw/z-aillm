@@ -29,7 +29,7 @@ Ollama does not train adapters itself. This build kit uses Hugging Face Transfor
 Install the training stack:
 
 ```powershell
-.\venv\Scripts\python.exe -m pip install -r .\z-aillm\training\requirements.txt
+.\z-aillm\install-training-stack.ps1
 ```
 
 Build the dataset:
@@ -60,6 +60,13 @@ After training, build an Ollama model from the adapter:
 Notes:
 
 - Llama 3.1 and Mixtral Hugging Face checkpoints may require accepting model terms and logging in with `huggingface-cli login`.
+- If training stops with `401 Unauthorized` for `meta-llama/Llama-3.1-8B-Instruct`, accept the model terms on Hugging Face, then run:
+
+  ```powershell
+  .\z-aillm\.venv\Scripts\huggingface-cli.exe login
+  .\z-aillm\train-z-aillm.ps1 -Profile llama3.1-8b
+  ```
+
 - QLoRA with `bitsandbytes` is best run on Linux/WSL with a CUDA GPU. Native Windows training may need full precision or a different backend.
 - `llama3.1:70b` and `mixtral:8x7b` require substantially more VRAM/RAM than `llama3.1:8b`.
 

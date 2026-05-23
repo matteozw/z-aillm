@@ -5,10 +5,13 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$Root = Split-Path -Parent $PSScriptRoot
-$Python = Join-Path $Root "venv\Scripts\python.exe"
+$Python = Join-Path $PSScriptRoot ".venv\Scripts\python.exe"
 if (-not (Test-Path -LiteralPath $Python)) {
-    $Python = "python"
+    $Root = Split-Path -Parent $PSScriptRoot
+    $Python = Join-Path $Root "venv\Scripts\python.exe"
+    if (-not (Test-Path -LiteralPath $Python)) {
+        $Python = "python"
+    }
 }
 
 $Config = Join-Path $PSScriptRoot "training\configs\$Profile-lora.yaml"

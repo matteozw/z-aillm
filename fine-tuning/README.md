@@ -13,7 +13,7 @@ Use fine-tuning for durable behavior, style, and domain patterns. Use RAG for fa
 Training commands:
 
 ```powershell
-.\venv\Scripts\python.exe -m pip install -r .\z-aillm\training\requirements.txt
+.\z-aillm\install-training-stack.ps1
 .\venv\Scripts\python.exe .\z-aillm\tools\prepare_finetune_dataset.py
 .\z-aillm\train-z-aillm.ps1 -Profile llama3.1-8b
 .\z-aillm\build-ollama-adapter.ps1 -Profile llama3.1-8b -ModelName z-aillm-tuned
@@ -26,3 +26,9 @@ Before training, review the dataset for:
 - Outdated law or policy text
 - Hallucinated citations
 - Examples that overstate legal certainty
+
+If Hugging Face returns `401 Unauthorized` for a Llama model, accept the gated model terms in your Hugging Face account and run:
+
+```powershell
+.\z-aillm\.venv\Scripts\huggingface-cli.exe login
+```
